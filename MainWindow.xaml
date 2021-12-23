@@ -5,8 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:paintbrush"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="700" Width="1000">
+    <Grid Background="AntiqueWhite">
+        <Canvas Background="White" HorizontalAlignment="Left" Height="500" Margin="180,160,0,0" VerticalAlignment="Top" Width="800"/>
+
+        <Button Name="btn_pencil" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,160,0,0" VerticalAlignment="Top" Width="80">
+            <StackPanel>
+                <Image Source="C:\Users\kimji\source\repos\paintbrush\Pencil.png" Width="60" Height="60"></Image>
+                <TextBlock Text="연필" TextAlignment="Center" FontSize="15"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Name="btn_eraser" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="95,160,0,0" VerticalAlignment="Top" Width="80">
+            <StackPanel>
+                <Image Source="C:\Users\kimji\source\repos\paintbrush\Eraser.png" Width="60" Height="60"></Image>
+                <TextBlock Text="지우개" TextAlignment="Center" FontSize="15"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Name="btn_line" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,245,0,0" VerticalAlignment="Top" Width="80">
+            <StackPanel>
+                <Image Source="C:\Users\kimji\source\repos\paintbrush\Line.png" Width="60" Height="60"></Image>
+                <TextBlock Text="선" TextAlignment="Center" FontSize="15"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Name="btn_square" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="95,245,0,0" VerticalAlignment="Top" Width="80">
+            <StackPanel>
+                <Image Source="C:\Users\kimji\source\repos\paintbrush\Square.png" Width="60" Height="60"></Image>
+                <TextBlock Text="사각형" TextAlignment="Center" FontSize="15"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Name="btn_triangle" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,330,0,0" VerticalAlignment="Top" Width="80">
+            <StackPanel>
+                <Image Source="C:\Users\kimji\source\repos\paintbrush\Triangle.png" Width="60" Height="60"></Image>
+                <TextBlock Text="삼각형" TextAlignment="Center" FontSize="15"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Name="btn_circle" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="95,330,0,0" VerticalAlignment="Top" Width="80">
+            <StackPanel>
+                <Image Source="C:\Users\kimji\source\repos\paintbrush\Circle.png" Width="60" Height="60"></Image>
+                <TextBlock Text="원" TextAlignment="Center" FontSize="15"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Name="btn_select" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,415,0,0" VerticalAlignment="Top" Width="80">
+            <StackPanel>
+                <Image Source="C:\Users\kimji\source\repos\paintbrush\Select.png" Width="60" Height="60"></Image>
+                <TextBlock Text="선택" TextAlignment="Center" FontSize="15"></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Name="btn_pipette" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="95,415,0,0" VerticalAlignment="Top" Width="80">
+            <StackPanel>
+                <Image Source="C:\Users\kimji\source\repos\paintbrush\Pipette.png" Width="60" Height="60"></Image>
+                <TextBlock Text="스포이드" TextAlignment="Center" FontSize="15"></TextBlock>
+            </StackPanel>
+        </Button>
         
     </Grid>
 </Window>

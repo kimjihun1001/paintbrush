@@ -20,9 +20,43 @@ namespace paintbrush
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static string PresentMode = null;
+        public static List<Button> button_mode_List = new List<Button>();
+
+        Line line = null;
         public MainWindow()
         {
             InitializeComponent();
+
+            button_mode_List.Add(btn_pencil);
+            button_mode_List.Add(btn_eraser);
+            button_mode_List.Add(btn_line);
+            button_mode_List.Add(btn_square);
+            button_mode_List.Add(btn_triangle);
+            button_mode_List.Add(btn_circle);
+            button_mode_List.Add(btn_select);
+            button_mode_List.Add(btn_pipette);
+
+        }
+
+
+        private void btn_mode_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            PresentMode = button.Name;
+            foreach (Button button_mode in button_mode_List)
+            {
+                if (button_mode.Name == PresentMode)
+                {
+                    button_mode.Background = Brushes.White;
+
+                }
+                else
+                {
+                    button_mode.Background = Brushes.DarkGray;
+                }
+            }
+
         }
     }
 }
