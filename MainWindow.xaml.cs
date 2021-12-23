@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace paintbrush
-{
+{ 
     /// <summary>
     /// MainWindow.xaml에 대한 상호 작용 논리
     /// </summary>
