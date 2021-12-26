@@ -58,5 +58,12 @@ namespace paintbrush
             }
 
         }
+
+        private void btn_color_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            box_presentColor.Background = button.Background;
+        }
     }
 }
