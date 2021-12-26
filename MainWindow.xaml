@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1000">
     <Grid Background="AntiqueWhite">
-        <Canvas Background="White" HorizontalAlignment="Left" Height="500" Margin="180,160,0,0" VerticalAlignment="Top" Width="800"/>
+        <Canvas Name="canvas1" MouseLeftButtonDown="canvas1_MouseLeftButtonDown" MouseMove="canvas1_MouseMove" MouseUp="canvas1_MouseUp" Background="White" HorizontalAlignment="Left" Height="500" Margin="180,160,0,0" VerticalAlignment="Top" Width="800"/>
 
         <Button Name="btn_pencil" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,160,0,0" VerticalAlignment="Top" Width="80">
             <StackPanel>
@@ -57,7 +57,11 @@
                 <TextBlock Text="스포이드" TextAlignment="Center" FontSize="15"></TextBlock>
             </StackPanel>
         </Button>
-        <Border Name="box_presentColor" Background="Black" BorderThickness="0" HorizontalAlignment="Left" Height="138" Margin="180,15,0,0" VerticalAlignment="Top" Width="143"/>
+        <Button Name="btn_strokeColor" Click="btn_selectingColor_Click" Background="Black" BorderBrush="DarkGray" BorderThickness="5" HorizontalAlignment="Left" Height="110" Margin="180,43,0,0" VerticalAlignment="Top" Width="138"/>
+        <Button Name="btn_fillColor" Click="btn_selectingColor_Click" Background="White" BorderThickness="0" HorizontalAlignment="Left" Height="110" Margin="326,43,0,0" VerticalAlignment="Top" Width="138"/>
+        <TextBlock HorizontalAlignment="Left" Margin="180,10,0,0" TextWrapping="Wrap" Text="테두리" TextAlignment="Center" FontSize="20" VerticalAlignment="Top" Height="28" Width="138"/>
+        <TextBlock HorizontalAlignment="Left" Margin="326,10,0,0" TextWrapping="Wrap" Text="채우기" TextAlignment="Center" FontSize="20" VerticalAlignment="Top" Height="28" Width="138"/>
+
         <Button Name="btn_color_1" Click="btn_color_Click" Background="blue" BorderThickness="0" HorizontalAlignment="Left" Height="65" Margin="850,15,0,0" VerticalAlignment="Top" Width="130"/>
         <Button x:Name="btn_color_2" Click="btn_color_Click" Background="Red" BorderThickness="0" HorizontalAlignment="Left" Height="65" Margin="850,88,0,0" VerticalAlignment="Top" Width="130"/>
         <Slider Name="slider_thickness" Minimum="1" Maximum="10" HorizontalAlignment="Left" Height="23" Margin="10,538,0,0" VerticalAlignment="Top" Width="165"/>
