@@ -194,8 +194,15 @@ namespace paintbrush
                     canvas1.Children.Add(rectangle);
                     break;
                 case "btn_paint":
-
-
+                    Shape shape = (Shape)e.Source;
+                    if (selectingColor == btn_strokeColor.Name)
+                    {
+                        shape.Stroke = btn_strokeColor.Background;
+                    }
+                    else
+                    {
+                        shape.Fill = btn_fillColor.Background;
+                    }
                     break;
                 case "btn_circle":
                     ellipse = new Ellipse();
@@ -219,6 +226,7 @@ namespace paintbrush
                 case "btn_select":
                     break;
                 case "btn_pipette":
+
                     break;
                 default:
                     break;
