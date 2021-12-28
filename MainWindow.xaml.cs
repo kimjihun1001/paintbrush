@@ -30,6 +30,26 @@ namespace paintbrush
         public static string selectingColor = null;
         public static List<Button> button_selectingColor_List = new List<Button>();
 
+        // 선택된 도형
+        public static Shape selectedShape = null;
+        public static List<Shape> shape_List = new List<Shape>();
+        // 선택된 도형의 초기 위치
+        public static double startPosition_Left = 0;
+        public static double startPosition_Top = 0;
+        public static double startPosition_Right = 0;
+        public static double startPosition_Bottom = 0;
+        // 선택된 도형의 초기 크기
+        public static double startWidth = 0;
+        public static double startHeight = 0;
+
+        // 도형의 모서리 중 어느 것을 선택했는지
+        public static int selectedEdge = 0;
+        // 최근 선택한 도형의 테두리 색 저장용
+        public static Shape currentShape = null;
+        // 버튼 누른 상태인지 확인
+        public static bool dragMove = false;
+
+        // 시작 포인트 지정 (도형 그릴 때)
         Point startPoint;
 
         // 연필로 자유 선 그리기
@@ -60,8 +80,28 @@ namespace paintbrush
             button_selectingColor_List.Add(btn_fillColor);
 
             selectingColor = btn_strokeColor.Name;
+
         }
 
+        private void checkSelectedShape()
+        {
+            if (shape_List.Count > 0)
+            {
+                foreach (Shape shape in shape_List)
+                {
+                    if (shape == selectedShape)
+                    {
+                        shape.Stroke = Brushes.Gold;
+                    }
+                    else
+                    {
+                        shape.Stroke = Brushes.Black;
+                    }
+                }
+
+            }
+            
+        }
 
         private void btn_selectingColor_Click(object sender, RoutedEventArgs e)
         {
@@ -139,6 +179,7 @@ namespace paintbrush
                     Canvas.SetZIndex(myPath, valueOfZIndex);
                     valueOfZIndex++;
 
+                    shape_List.Add(myPath);
                     canvas1.Children.Add(myPath);
 
                     break;
@@ -169,9 +210,11 @@ namespace paintbrush
                     line.Stroke = btn_strokeColor.Background;
                     line.StrokeThickness = slider_thickness.Value;
 
+
                     Canvas.SetZIndex(line, valueOfZIndex);
                     valueOfZIndex++;
 
+                    shape_List.Add(line);
                     canvas1.Children.Add(line);
                     break;
                 case "btn_square":
@@ -191,17 +234,25 @@ namespace paintbrush
                     Canvas.SetZIndex(rectangle, valueOfZIndex);
                     valueOfZIndex++;
 
+                    shape_List.Add(rectangle);
                     canvas1.Children.Add(rectangle);
                     break;
                 case "btn_paint":
-                    Shape shape = (Shape)e.Source;
-                    if (selectingColor == btn_strokeColor.Name)
+                    try
                     {
-                        shape.Stroke = btn_strokeColor.Background;
+                        Shape shape = (Shape)e.Source;
+                        if (selectingColor == btn_strokeColor.Name)
+                        {
+                            shape.Stroke = btn_strokeColor.Background;
+                        }
+                        else
+                        {
+                            shape.Fill = btn_fillColor.Background;
+                        }
                     }
-                    else
+                    catch
                     {
-                        shape.Fill = btn_fillColor.Background;
+
                     }
                     break;
                 case "btn_circle":
@@ -221,12 +272,65 @@ namespace paintbrush
                     Canvas.SetZIndex(ellipse, valueOfZIndex);
                     valueOfZIndex++;
 
+                    shape_List.Add(ellipse);
                     canvas1.Children.Add(ellipse);
                     break;
                 case "btn_select":
+                    try
+                    {
+                        Shape shape = (Shape)e.Source;
+
+                        startPoint = new Point();
+                        startPoint.X = clickPoint.X;
+                        startPoint.Y = clickPoint.Y;
+
+                        selectedShape = shape;
+                        checkSelectedShape();
+                        dragMove = true;
+
+                        startPosition_Left = Canvas.GetLeft(shape);
+                        startPosition_Top = Canvas.GetTop(shape);
+                        startPosition_Right = Canvas.GetRight(shape);
+                        startPosition_Bottom = Canvas.GetBottom(shape);
+
+                        startWidth = shape.Width;
+                        startHeight = shape.Height;
+
+                        if ((clickPoint.X > startPosition_Left + startWidth - 5 && clickPoint.X < startPosition_Left + startWidth + 5) && (clickPoint.Y > startPosition_Top + startHeight - 5 && clickPoint.Y < startPosition_Top + startHeight + 5))
+                        {
+                            selectedEdge = 4;
+                        }
+                        else
+                        {
+                            selectedEdge = 0;
+                        }
+
+                    }
+                    catch
+                    {
+                        selectedShape = null;
+                        checkSelectedShape();
+                        dragMove = false;
+                        selectedEdge = 0;
+                    }
                     break;
                 case "btn_pipette":
+                    try
+                    {
+                        Shape shape = (Shape)e.Source;
+                        if (selectingColor == btn_strokeColor.Name)
+                        {
+                            btn_strokeColor.Background = shape.Stroke;
+                        }
+                        else
+                        {
+                            btn_fillColor.Background = shape.Fill;
+                        }
+                    }
+                    catch
+                    {
 
+                    }
                     break;
                 default:
                     break;
@@ -333,6 +437,37 @@ namespace paintbrush
                     }
                     break;
                 case "btn_select":
+                    try
+                    {
+                        if (dragMove)
+                        {
+                            if (selectedEdge == 4)
+                            {
+                                Shape shape = (Shape)e.Source;
+
+                                double moveX = drawPoint.X - startPoint.X;
+                                double moveY = drawPoint.Y - startPoint.Y;
+
+                                shape.Width = startWidth + moveX;
+                                shape.Height = startHeight + moveY;
+
+                            }
+                            else
+                            {
+                                Shape shape = (Shape)e.Source;
+
+                                double moveX = drawPoint.X - startPoint.X;
+                                double moveY = drawPoint.Y - startPoint.Y;
+
+                                Canvas.SetLeft(shape, startPosition_Left + moveX);
+                                Canvas.SetTop(shape, startPosition_Top + moveY);
+                            }
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                     break;
                 case "btn_pipette":
                     break;
@@ -367,6 +502,8 @@ namespace paintbrush
                     ellipse = null;
                     break;
                 case "btn_select":
+                    dragMove = false;
+                    selectedEdge = 0;
                     break;
                 case "btn_pipette":
                     break;
