@@ -32,7 +32,14 @@ namespace paintbrush
 
         Point startPoint;
 
+        // 연필로 자유 선 그리기
+        public static PathFigure myPathFigure = null;
+        public static PathGeometry myPathGeometry = null;
+        public static Path myPath = null;
+
         Line line = null;
+        Ellipse ellipse = null;
+
         Rectangle rectangle = null;
         public MainWindow()
         {
@@ -115,9 +122,43 @@ namespace paintbrush
             switch (presentMode)
             {
                 case "btn_pencil":
+                    myPathFigure = new PathFigure();
+                    myPathFigure.StartPoint = clickPoint;
+
+                    myPathGeometry = new PathGeometry();
+                    myPathGeometry.Figures.Add(myPathFigure);
+
+                    myPath = new Path();
+                    myPath.Data = myPathGeometry;
+
+                    myPath.Stroke = btn_strokeColor.Background;
+                    myPath.StrokeThickness = slider_thickness.Value;
+                    // 이거 넣으면 경로들 안쪽이 채워지면서 이상해짐!!
+                    // myPath.Fill = btn_strokeColor.Background;
+
+                    Canvas.SetZIndex(myPath, valueOfZIndex);
+                    valueOfZIndex++;
+
+                    canvas1.Children.Add(myPath);
 
                     break;
                 case "btn_eraser":
+                    myPathFigure = new PathFigure();
+                    myPathFigure.StartPoint = clickPoint;
+
+                    myPathGeometry = new PathGeometry();
+                    myPathGeometry.Figures.Add(myPathFigure);
+
+                    myPath = new Path();
+                    myPath.Data = myPathGeometry;
+
+                    myPath.Stroke = Brushes.White;
+                    myPath.StrokeThickness = slider_thickness.Value * 5;
+
+                    Canvas.SetZIndex(myPath, valueOfZIndex);
+                    valueOfZIndex++;
+
+                    canvas1.Children.Add(myPath);
                     break;
                 case "btn_line":
                     line = new Line();
@@ -174,9 +215,20 @@ namespace paintbrush
             switch (presentMode)
             {
                 case "btn_pencil":
-
+                    if (myPath != null)
+                    {
+                        LineSegment myLineSegment = new LineSegment();
+                        myLineSegment.Point = drawPoint;
+                        myPathFigure.Segments.Add(myLineSegment);
+                    }
                     break;
                 case "btn_eraser":
+                    if (myPath != null)
+                    {
+                        LineSegment myLineSegment = new LineSegment();
+                        myLineSegment.Point = drawPoint;
+                        myPathFigure.Segments.Add(myLineSegment);
+                    }
                     break;
                 case "btn_line":
                     if (line != null)
@@ -236,9 +288,14 @@ namespace paintbrush
             switch (presentMode)
             {
                 case "btn_pencil":
-
+                    myPath = null;
+                    myPathFigure = null;
+                    myPathGeometry = null;
                     break;
                 case "btn_eraser":
+                    myPath = null;
+                    myPathFigure = null;
+                    myPathGeometry = null;
                     break;
                 case "btn_line":
                     line = null;
