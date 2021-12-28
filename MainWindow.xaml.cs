@@ -512,6 +512,18 @@ namespace paintbrush
             }
         }
 
-        
+        private void btn_delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedShape != null)
+            {
+                foreach(Shape shape in shape_List)
+                {
+                    if (shape == selectedShape)
+                    {
+                        canvas1.Children.Remove(shape);
+                    }
+                }
+            }
+        }
     }
 }
