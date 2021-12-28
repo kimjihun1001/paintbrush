@@ -8,17 +8,7 @@
         Title="MainWindow" Height="700" Width="1000">
     <Grid Background="AntiqueWhite">
         <Canvas Name="canvas1" MouseLeftButtonDown="canvas1_MouseLeftButtonDown" MouseMove="canvas1_MouseMove" MouseUp="canvas1_MouseUp" Background="White" HorizontalAlignment="Left" Height="500" Margin="180,160,0,0" VerticalAlignment="Top" Width="800">
-            <Path Stroke="Black" StrokeThickness="1">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathFigure StartPoint="10,50">
-                            <LineSegment Point="200,70" />
-                            <LineSegment Point="250,90" />
 
-                        </PathFigure>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
         </Canvas>
 
         <Button Name="btn_pencil" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,160,0,0" VerticalAlignment="Top" Width="80">
@@ -45,10 +35,10 @@
                 <TextBlock Text="사각형" TextAlignment="Center" FontSize="15"></TextBlock>
             </StackPanel>
         </Button>
-        <Button Name="btn_triangle" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,330,0,0" VerticalAlignment="Top" Width="80">
+        <Button Name="btn_paint" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="10,330,0,0" VerticalAlignment="Top" Width="80">
             <StackPanel>
-                <Image Source="C:\Users\kimji\source\repos\paintbrush\Triangle.png" Width="60" Height="60"></Image>
-                <TextBlock Text="삼각형" TextAlignment="Center" FontSize="15"></TextBlock>
+                <Image Source="C:\Users\kimji\source\repos\paintbrush\Paint.png" Width="60" Height="60"></Image>
+                <TextBlock Text="페인트" TextAlignment="Center" FontSize="15"></TextBlock>
             </StackPanel>
         </Button>
         <Button Name="btn_circle" Click="btn_mode_Click" Background="DarkGray" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="95,330,0,0" VerticalAlignment="Top" Width="80">

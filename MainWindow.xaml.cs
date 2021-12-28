@@ -38,9 +38,9 @@ namespace paintbrush
         public static Path myPath = null;
 
         Line line = null;
+        Rectangle rectangle = null;
         Ellipse ellipse = null;
 
-        Rectangle rectangle = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -50,7 +50,7 @@ namespace paintbrush
             button_mode_List.Add(btn_eraser);
             button_mode_List.Add(btn_line);
             button_mode_List.Add(btn_square);
-            button_mode_List.Add(btn_triangle);
+            button_mode_List.Add(btn_paint);
             button_mode_List.Add(btn_circle);
             button_mode_List.Add(btn_select);
             button_mode_List.Add(btn_pipette);
@@ -193,9 +193,28 @@ namespace paintbrush
 
                     canvas1.Children.Add(rectangle);
                     break;
-                case "btn_triangle":
+                case "btn_paint":
+
+
                     break;
                 case "btn_circle":
+                    ellipse = new Ellipse();
+
+                    startPoint = new Point();
+                    startPoint.X = clickPoint.X;
+                    startPoint.Y = clickPoint.Y;
+
+                    Canvas.SetLeft(ellipse, clickPoint.X);
+                    Canvas.SetTop(ellipse, clickPoint.Y);
+
+                    ellipse.Fill = btn_fillColor.Background;
+                    ellipse.Stroke = btn_strokeColor.Background;
+                    ellipse.StrokeThickness = slider_thickness.Value;
+
+                    Canvas.SetZIndex(ellipse, valueOfZIndex);
+                    valueOfZIndex++;
+
+                    canvas1.Children.Add(ellipse);
                     break;
                 case "btn_select":
                     break;
@@ -270,9 +289,40 @@ namespace paintbrush
                         }
                     }
                     break;
-                case "btn_triangle":
+                case "btn_paint":
                     break;
                 case "btn_circle":
+                    if (ellipse != null)
+                    {
+                        ellipse.Height = Math.Abs(drawPoint.Y - startPoint.Y);
+                        ellipse.Width = Math.Abs(drawPoint.X - startPoint.X);
+
+                        if (drawPoint.X < startPoint.X)
+                        {
+                            if (drawPoint.Y < startPoint.Y)
+                            {
+                                Canvas.SetLeft(ellipse, drawPoint.X);
+                                Canvas.SetTop(ellipse, drawPoint.Y);
+
+                            }
+                            else
+                            {
+                                Canvas.SetLeft(ellipse, drawPoint.X);
+
+                            }
+                        }
+                        else
+                        {
+                            if (drawPoint.Y < startPoint.Y)
+                            {
+                                Canvas.SetTop(ellipse, drawPoint.Y);
+
+                            }
+                            else
+                            {
+                            }
+                        }
+                    }
                     break;
                 case "btn_select":
                     break;
@@ -303,9 +353,10 @@ namespace paintbrush
                 case "btn_square":
                     rectangle = null;
                     break;
-                case "btn_triangle":
+                case "btn_paint":
                     break;
                 case "btn_circle":
+                    ellipse = null;
                     break;
                 case "btn_select":
                     break;
